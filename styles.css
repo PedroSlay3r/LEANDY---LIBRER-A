@@ -1,0 +1,175 @@
+    :root {
+        --bg-overlay: rgba(255, 255, 255, 0.35);
+        /* antes 0.55 */
+        --card-bg: rgba(255, 255, 255, 0.65);
+        /* antes 0.08 / 0.75 */
+        --card-border: rgba(0, 0, 0, 0.08);
+        --text: #1e293b;
+        /* slate-800 */
+        --muted: #475569;
+        /* slate-600 */
+        --accent: #5c8251;
+        /* cyan-500 */
+    }
+
+    * {
+        box-sizing: border-box
+    }
+
+    html,
+    body {
+        height: 100%
+    }
+
+    body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+        color: var(--text);
+        background: #0b1022 url('bg.jpg') center / cover no-repeat fixed;
+    }
+
+    /* Background overlay for contrast */
+    .overlay {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+    }
+
+    .wrapper {
+        position: relative;
+        min-height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 720px;
+        backdrop-filter: blur(8px) saturate(120%);
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 24px;
+        padding: 32px;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        animation: pop 600ms cubic-bezier(.2, .9, .2, 1) 60ms both;
+    }
+
+    @keyframes pop {
+        from {
+            transform: translateY(12px) scale(.98);
+            opacity: 0
+        }
+
+        to {
+            transform: none;
+            opacity: 1
+        }
+    }
+
+    .logo {
+        width: 100%;
+        display: block;
+        margin: 0 auto 16px auto;
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, .35));
+    }
+
+    h1 {
+        margin: 8px 0 8px;
+        font-size: clamp(28px, 3.5vw, 42px);
+        letter-spacing: .2px
+    }
+
+    p.lead {
+        margin: 0 auto 18px;
+        max-width: 56ch;
+        font-size: clamp(14px, 2.2vw, 18px);
+        color: var(--muted);
+    }
+
+    .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgb(92 130 81 / 12%);
+        border: 1px solid rgb(92 130 81 / 35%);
+        margin-bottom: 14px;
+        font-size: 14px;
+        color: #e0f2fe;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 14px var(--accent);
+    }
+
+    .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 16px
+    }
+
+    .btn {
+        --btn-bg: rgba(255, 255, 255, 0.12);
+        --btn-bd: rgba(255, 255, 255, 0.28);
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+        border-radius: 14px;
+        border: 1px solid var(--btn-bd);
+        background: var(--btn-bg);
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 600;
+        transition: transform .15s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .btn:hover {
+        transform: translateY(-1px);
+        background: rgba(255, 255, 255, 0.18);
+        border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .btn:active {
+        transform: translateY(0);
+    }
+
+    .footer {
+        margin-top: 24px;
+        font-size: 12px;
+        color: #000;
+        opacity: .8
+    }
+
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0
+    }
+
+    /* Small convenience: reduce motion if user prefers */
+    @media (prefers-reduced-motion: reduce) {
+        .card {
+            animation: none
+        }
+
+        .btn {
+            transition: none
+        }
+    }
